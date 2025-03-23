@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "username": "teacher1",
+            "password": "123",
+            "role": "teacher",
+            "student_id": null
+        }
+    ],
+    "students": [
+        {
+            "id": "2401",
+            "name": "王小明",
+            "class": "高一（1）班",
+            "age": "19",
+            "score": "90"
+        }
+    ]
+}

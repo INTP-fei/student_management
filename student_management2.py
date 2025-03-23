@@ -3,9 +3,7 @@ import os
 # json 模块：用于处理 JSON 数据的读取和写入，可以将数据保存为 JSON 格式（易于存储和交换）。
 # os 模块：用于与操作系统交互，这里用它来检查文件是否存在。
 
-# 定义数据文件的名称
-DATA_FILE = 'data.json' #这个文件会存储用户和学生的所有信息。
-
+DATA_FILE = 'data.json' 
 #加载数据
 def load_data():
     """
@@ -15,7 +13,6 @@ def load_data():
     # 检查数据文件是否存在
     if not os.path.exists(DATA_FILE): # os.path.exists(path)函数，检查指定的路径（path）所对应的文件或者目录是否存在。
         return {'users': [], 'students': []}
-  
     # 以只读模式打开数据文件，使用UTF-8编码
     with open(DATA_FILE, 'r', encoding='utf-8') as f:# 将打开的文件对象赋值给变量 f
         # 解析JSON文件内容并返回
@@ -50,7 +47,7 @@ def register():
     role = input("请选择角色 (teacher/student): ").lower()
 
     # 检查用户名是否已经存在
-    if any(u['username'] == username for u in data['users']):
+    if any(u['username'] == username for u in data['users']): # 一个生成器表达式
         print("用户名已存在!")
         return
     """
@@ -153,6 +150,7 @@ def teacher_menu():
             data['students'] = [s for s in data['students'] if s['id'] != student_id]
             # 过滤掉与要删除学生关联的用户信息
             data['users'] = [u for u in data['users'] if u.get('student_id') != student_id]
+            #get()方法用于返回字典中指定的键对应的值，如果键不存在，则返回指定的默认值。
             # 保存更新后的数据
             save_data(data)
             print("删除成功!" if len(data['students']) else "未找到该学生")
@@ -175,12 +173,11 @@ def teacher_menu():
                 print("修改成功!")
             else:
                 print("未找到该学生")
-              
         elif choice == '4':
             print("\n--- 学生列表 ---")
             # 遍历学生列表并打印学生信息
             for student in data['students']:
-                print(f"学号: {student['id']} | 姓名: {student['name']} | 班级: {student['class']}")
+                print(f"学号: {student['id']} | 姓名: {student['name']} | 班级: {student['class']} |年龄: {student['age']} | 成绩: {student['score']}")
               
         elif choice == '5':
             break
